@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "dyfrgi.h"
 
-enum my_keycodes {
+enum ctrl_keycodes {
     U_T_AUTO = SAFE_RANGE, //USB Extra Port Toggle Auto Detect / Always Active
     U_T_AGCR,              //USB Toggle Automatic GCR control
     DBG_TOG,               //DEBUG Toggle On / Off
@@ -20,6 +20,8 @@ enum layer_names {
 };
 
 #define ADJUST MO(_ADJUST)
+#define QWERTY DF(_QWERTY)
+#define DVORAK DF(_DVORAK)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DVORAK] = LAYOUT_wrapper(
@@ -28,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  _______________DVORAK_LEFT1________________, _______________DVORAK_RIGHT1_______________, KC_SLSH, KC_EQL,  KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
         KC_LCTL, _______________DVORAK_LEFT2________________, _______________DVORAK_RIGHT2_______________, KC_MINS, KC_ENT, \
         KC_LSFT, _______________DVORAK_LEFT3________________, _______________DVORAK_RIGHT3_______________, KC_RSFT,                              KC_UP, \
-        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, ADJUST,  KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, ADJUST,             KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     [_QWERTY] = LAYOUT_wrapper(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, KC_PAUS, \
@@ -36,10 +38,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  _______________QWERTY_LEFT1________________, _______________QWERTY_RIGHT1_______________, KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
         KC_LCTL, _______________QWERTY_LEFT2________________, _______________QWERTY_RIGHT2_______________, KC_QUOT, KC_ENT, \
         KC_LSFT, _______________QWERTY_LEFT3________________, _______________QWERTY_RIGHT3_______________, KC_RSFT,                              KC_UP, \
-        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, ADJUST,  KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, ADJUST,             KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     [_ADJUST] = LAYOUT_wrapper(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______, \
+        _______, QWERTY,  DVORAK,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU, \
         _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD, \
         _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
