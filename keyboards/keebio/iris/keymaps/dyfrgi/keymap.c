@@ -6,6 +6,9 @@ enum my_layers {
     ADJUST
 };
 
+#define CTL_ESC MT(MOD_LCTL, KC_ESC)
+#define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -17,14 +20,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
   //│ LShift │   ;    │   Q    │   J    │   K    │   X    │        │        │ ADJUST │   B    │   M    │   W    │   V    │   Z    │ RShift │
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-  //                               │  Del   │Ctrl/Ret│SYMB/Esc│                 │ NUMB   │Spc/Supr│   BS   │
+  //                               │  Del   │Ctrl/Ret│SYMB/Esc│                 │ NUMB   │Spc/Supr│ Alt/BS │
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  [BASE] = LAYOUT(
+  [BASE] = LAYOUT_wrapper(
      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-     KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                               KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-     KC_LALT, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                               KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_RCTL,
+     KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                               KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
+     CTL_ESC, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                               KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_RCTL,
      KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_TRNS,      MO(ADJUST),  KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
-                          KC_DEL, MT(MOD_LCTL, KC_ENT), LT(SYMB, KC_ESC),     MO(NUMB), MT(MOD_LGUI, KC_SPC), KC_BSPC
+                    KC_LALT, MT(MOD_LCTL, KC_ENT), LT(SYMB, KC_ESC),     MO(NUMB), MT(MOD_LGUI, KC_SPC), MT(MOD_LALT, KC_BSPC)
+                    // ALT, SUPER, SYMB, NUMB
+                    // SPACE, ENTER, ESC
   ),
  
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -38,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
   //                               │        │        │        │                 │        │        │        │
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  [SYMB] = LAYOUT(
+  [SYMB] = LAYOUT_wrapper(
          _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, KC_PSCR,
          _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                            _______, _______, _______, _______, _______, KC_INS,
          _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                             KC_AMPR, KC_MINS, KC_BSLS, _______, _______, _______,
@@ -56,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
   //                               │        │        │        │                 │        │        │        │
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  [NUMB] = LAYOUT(
+  [NUMB] = LAYOUT_wrapper(
          _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
          _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
          KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                              _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
@@ -74,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
   //                               │        │        │        │                 │        │        │        │
   //                               └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  [ADJUST] = LAYOUT(
+  [ADJUST] = LAYOUT_wrapper(
          _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
          _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
          _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
