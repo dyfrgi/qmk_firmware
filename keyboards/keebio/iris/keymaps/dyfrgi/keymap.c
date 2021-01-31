@@ -6,7 +6,8 @@ enum my_layers {
 };
 
 #define CTL_ESC MT(MOD_LCTL, KC_ESC)
-#define RCTL_ESC MT(MOD_RCTL, KC_ESC)
+#define RCTL_LEADER MT(MOD_RCTL, KC_MINS)
+#define RSE_VIM_LEADER LT(RAISE, KC_MINS)
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -25,9 +26,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_wrapper(
      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
      KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                               KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-     KC_LCTL, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                               KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    RCTL_ESC,
+     KC_LCTL, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                               KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    RCTL_LEADER,
      KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_TRNS,      MO(ADJUST),  KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
-                                    KC_LGUI, KC_SPACE, MO(RAISE),         MO(RAISE), KC_ENTER, KC_LALT
+                                    KC_LALT, KC_SPACE, MO(RAISE),         KC_LGUI, KC_ENTER, RSE_VIM_LEADER
                     // ALT, SUPER, SYMB, NUMB
                     // SPACE, ENTER, ESC
   ),
@@ -46,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [RAISE] = LAYOUT_wrapper(
          _______,  KC_F1,  KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,
          _______,  KC_F11, KC_F12,  _______, _______, _______,                            _______, _______, KC_PSCR, KC_SLCK, KC_PAUS, _______,
-         _______,  KC_GRV, KC_LBRC, KC_RBRC, KC_BSLS, _______,                            KC_INS,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+         _______,  KC_GRV, KC_LBRC, KC_RBRC, KC_EQL,  KC_BSLS,                            KC_INS,  KC_LEFT, KC_UP,   KC_DOWN, KC_RGHT, _______,
          _______, _______, KC_MINS, _______, _______, _______, _______,          _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______,
                                              _______, _______, _______,          _______, _______, _______
   ),
